@@ -1,0 +1,35 @@
+<aside #mainSidebar class="main-sidebar sidebar-{{skin}} elevation-4"
+[class.sidebar-no-expand]="layoutOptions?.isMainSidebarDisableHoverOrFocusAutoExpand">
+    <!-- Brand Logo -->
+    <a [routerLink]="['/']" class="brand-link"    
+    [class.text-sm]="layoutOptions?.isBrandSmallText"
+    [class.navbar-primary]="layoutOptions?.colorVariants?.brandLogo === 'navbar-primary'"
+    [class.navbar-secondary]="layoutOptions?.colorVariants?.brandLogo === 'navbar-secondary'"
+    [class.navbar-info]="layoutOptions?.colorVariants?.brandLogo === 'navbar-info'"
+    [class.navbar-success]="layoutOptions?.colorVariants?.brandLogo === 'navbar-success'"
+    [class.navbar-danger]="layoutOptions?.colorVariants?.brandLogo === 'navbar-danger'"
+    [class.navbar-indigo]="layoutOptions?.colorVariants?.brandLogo === 'navbar-indigo'"
+    [class.navbar-purple]="layoutOptions?.colorVariants?.brandLogo === 'navbar-purple'"
+    [class.navbar-pink]="layoutOptions?.colorVariants?.brandLogo === 'navbar-pink'"
+    [class.navbar-cyan]="layoutOptions?.colorVariants?.brandLogo === 'navbar-cyan'"
+    [class.navbar-dark]="layoutOptions?.colorVariants?.brandLogo === 'navbar-dark'"
+    [class.navbar-gray-dark]="layoutOptions?.colorVariants?.brandLogo === 'navbar-gray-dark'"
+    [class.navbar-gray]="layoutOptions?.colorVariants?.brandLogo === 'navbar-gray'"
+    [class.navbar-light]="layoutOptions?.colorVariants?.brandLogo === 'navbar-light'"
+    [class.navbar-warning]="layoutOptions?.colorVariants?.brandLogo === 'navbar-warning'"
+    [class.navbar-white]="layoutOptions?.colorVariants?.brandLogo === 'navbar-white'"
+    [class.navbar-orange]="layoutOptions?.colorVariants?.brandLogo === 'navbar-orange'">
+        <img [src]="logo" [alt]="appName" class="brand-image img-circle elevation-3" style="opacity: .8" />
+        <span class="brand-text font-weight-light">{{appName}}</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <ng-template [ngTemplateOutlet]="jhiMainSidebarUserPanel.templateRef"></ng-template>
+        <!-- Sidebar Menu -->
+        <ng-template [ngTemplateOutlet]="jhiMainSidebarMenuTreeView.templateRef"></ng-template>        
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

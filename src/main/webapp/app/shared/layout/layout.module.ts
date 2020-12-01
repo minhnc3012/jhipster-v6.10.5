@@ -4,8 +4,13 @@ import { RouterModule } from "@angular/router";
 import { LayoutConfig } from "./layout.config";
 import { layoutProvider } from "./layout.provider";
 import { LayoutService } from "./layout.service";
-//import { RoutingService } from "./routing.service";
+// import { RoutingService } from "./routing.service";
 import { LayoutWrapperModule } from './wrapper/wrapper.module';
+import { LayoutContentModule } from './content/content.module';
+import { LayoutHeaderModule } from './header/header.module';
+import { LayoutFooterModule } from './footer/footer.module';
+import { LayoutMainSidebarModule } from './main-sidebar/main-sidebar.module';
+import { RoutingService } from './routing.service';
 
 @NgModule({
     declarations: [],
@@ -14,10 +19,14 @@ import { LayoutWrapperModule } from './wrapper/wrapper.module';
         RouterModule
     ],
     exports: [
-        LayoutWrapperModule
+        LayoutWrapperModule,
+        LayoutContentModule,
+        LayoutHeaderModule,
+        LayoutFooterModule,
+        LayoutMainSidebarModule
     ],
     providers: [
-        // RoutingService
+        RoutingService
     ]
 })
 export class LayoutModule {

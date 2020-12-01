@@ -1,13 +1,13 @@
 <!-- Content Header (Page header) -->
 <section #sectionHeader class="content-header">
   <div class="container-fluid">
-    <ng-template *ngIf="layoutSectionHeaderComponent" [ngTemplateOutlet]="layoutSectionHeaderComponent.templateRef"></ng-template>
+    <ng-template *ngIf="jhiLayoutSectionHeader" [ngTemplateOutlet]="jhiLayoutSectionHeader.templateRef"></ng-template>
   </div>
 </section>
 
 <!-- Main content -->
 <section #sectionContent class="content">
   <div class="container-fluid">
-    <ng-template *ngIf="layoutSectionContentComponent" [ngTemplateOutlet]="layoutSectionContentComponent.templateRef"></ng-template>
+    <ng-template *ngIf="jhiLayoutSectionContent" [ngTemplateOutlet]="jhiLayoutSectionContent.templateRef"></ng-template>
   </div>
 </section>

@@ -4,6 +4,7 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
+import { sidebarMenu } from '../sidebar-menu.config';
 
 @Component({
   selector: 'jhi-main',
@@ -11,6 +12,9 @@ import { AccountService } from 'app/core/auth/account.service';
 })
 export class MainComponent implements OnInit {
   private renderer: Renderer2;
+  public sidebarMenu = sidebarMenu;
+  public sidebarMenuOpened = true;
+  public sidebarControlOpened = false;
 
   constructor(
     private accountService: AccountService,
@@ -56,5 +60,30 @@ export class MainComponent implements OnInit {
       pageTitle = 'global.title';
     }
     this.translateService.get(pageTitle).subscribe(title => this.titleService.setTitle(title));
+  }
+  logout(): void {
+
+  }
+  toggleMenuSidebar(): void {
+    if (this.sidebarMenuOpened) {
+      this.renderer.removeClass(document.body, 'sidebar-open');
+      this.renderer.addClass(document.body, 'sidebar-collapse');
+      this.sidebarMenuOpened = false;
+    } else {
+      this.renderer.removeClass(document.body, 'sidebar-collapse');
+      this.renderer.addClass(document.body, 'sidebar-open');
+      this.sidebarMenuOpened = true;
+    }
+  }
+  toggleControlSidebar(): void {
+    if (this.sidebarControlOpened) {
+      this.renderer.removeClass(document.body, 'control-sidebar-open');
+      this.renderer.addClass(document.body, 'control-sidebar-collapse');
+      this.sidebarControlOpened = false;
+    } else {
+      this.renderer.removeClass(document.body, 'control-sidebar-collapse');
+      this.renderer.addClass(document.body, 'control-sidebar-open');
+      this.sidebarControlOpened = true;
+    }
   }
 }

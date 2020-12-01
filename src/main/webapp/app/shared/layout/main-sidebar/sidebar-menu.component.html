@@ -1,0 +1,37 @@
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"
+    [class.text-sm]="layoutOptions?.isSidebarNavSmallText"
+    [class.nav-flat]="layoutOptions?.isSidebarNavFlatStyle"
+    [class.nav-legacy]="layoutOptions?.isSidebarNavLegacyStyle"
+    [class.nav-compact]="layoutOptions?.isSidebarNavCompact"
+    [class.nav-child-indent]="layoutOptions?.isSidebarNavChildIndent">
+        <ng-container *ngFor="let item of menu">
+            <ng-container *ngTemplateOutlet="sidebarInner; context: {item: item}"></ng-container>
+        </ng-container>
+    </ul>
+</nav>
+<ng-template #sidebarInner let-item="item">
+    <li class="nav-item" [class.nav-header]="item.separator" [class.menu-open]="!item.isCollapsed"
+        [class.has-treeview]="item.children">
+        <span *ngIf="item.separator">{{item.label}}</span>
+        <a *ngIf="!item.separator && item.route" [routerLink]="item.route" class="nav-link" routerLinkActive="active">
+            <i [class]="getIconClasses(item)"></i>
+            <p>
+                {{item.label}}
+            </p>
+        </a>
+        <a *ngIf="!item.separator && !item.route" href="#" [class.active]="item.isActive" class="nav-link"
+            (click)="toggleMenu($event, item)">
+            <i [class]="getIconClasses(item)"></i>
+            <p>
+                {{item.label}}
+                <i *ngIf="item.children" class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul *ngIf="item.children" [collapse]="item.isCollapsed" [isAnimated]="true" class="nav nav-treeview">
+            <ng-container *ngFor="let item of item.children">
+                <ng-container *ngTemplateOutlet="sidebarInner; context: {item: item}"></ng-container>
+            </ng-container>
+        </ul>
+    </li>
+</ng-template>

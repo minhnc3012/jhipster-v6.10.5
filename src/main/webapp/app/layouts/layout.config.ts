@@ -1,5 +1,5 @@
 export const layoutConfig = {
-    logo: 'assets/img/AdminLTELogo.png',
+    logo: 'content/images/AdminLTELogo.png',
     appName: 'Auto Test',
     type: 'sidebar-mini layout-fixed layout-navbar-fixed',
     layoutOptions: {

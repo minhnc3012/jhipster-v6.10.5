@@ -3,6 +3,7 @@ import { NavigationEnd, RouterEvent } from '@angular/router';
 import { RoutingService } from '../routing.service';
 import { removeSubscriptions } from '../helpers';
 import { LayoutStore } from '../layout.store';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'jhi-layout-section-header',
@@ -11,7 +12,7 @@ import { LayoutStore } from '../layout.store';
 })
 export class LayoutSectionHeaderComponent {
     @ViewChild('templateRef', { static: true }) 
-    public templateRef: TemplateRef<any>;
+    public templateRef!: TemplateRef<any>;
 }
 
 @Component({
@@ -21,7 +22,7 @@ export class LayoutSectionHeaderComponent {
 })
 export class LayoutSectionContentComponent {
     @ViewChild('templateRef', { static: true }) 
-    public templateRef: TemplateRef<any>;
+    public templateRef!: TemplateRef<any>;
 }
 
 
@@ -33,31 +34,33 @@ export class LayoutSectionContentComponent {
 export class LayoutSectionComponent implements OnInit, AfterViewInit, OnDestroy {
     SECTION_HEADER_HEIGHT = 57;
 
-    @Input() fixHeader:boolean = false;
+    @Input() fixHeader = false;
     
-    private subscriptions = [];
+    private subscriptions?:Array<Subscription> = [];
 
-    @ViewChild('sectionHeader', { static: true }) sectionHeader: ElementRef;
-    @ViewChild('sectionContent', { static: true }) sectionContent: ElementRef;
+    @ViewChild('sectionHeader', { static: true }) 
+    sectionHeader!: ElementRef;
+    @ViewChild('sectionContent', { static: true }) 
+    sectionContent!: ElementRef;
 
     @ContentChild(LayoutSectionHeaderComponent, { static: true })
-    public layoutSectionHeaderComponent: LayoutSectionHeaderComponent;
+    public jhiLayoutSectionHeader!: LayoutSectionHeaderComponent;
     @ContentChild(LayoutSectionContentComponent, { static: true })
-    public layoutSectionHeaderComponent: LayoutSectionContentComponent;
+    public jhiLayoutSectionContent!: LayoutSectionContentComponent;
 
     constructor(
         protected renderer: Renderer2,
         public routingService: RoutingService,
-        public LayoutStore: LayoutStore) { }
+        public layoutStore: LayoutStore) { }
 
-    ngOnInit() {
-        this.subscriptions.push(this.routingService.events.subscribe((event: RouterEvent) => {
+    ngOnInit(): void {
+        this.subscriptions?.push(this.routingService.events.subscribe((event: RouterEvent) => {
             if (event instanceof NavigationEnd) {
-                //this.updateHeightSectionContent();
+                // this.updateHeightSectionContent();
             }
         }));
-        this.subscriptions.push(this.LayoutStore.appName.subscribe((value) => {
-            console.log(value);            
+        this.subscriptions?.push(this.layoutStore.appName.subscribe((value) => {
+            window.console.log(value);            
         }));
     }
 
@@ -73,17 +76,17 @@ export class LayoutSectionComponent implements OnInit, AfterViewInit, OnDestroy 
     /**
     * @method ngOnDestroy
     */
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.subscriptions = removeSubscriptions(this.subscriptions);
     }
 
     @HostListener('window:resize', ['$event'])
-    onResize(event: Event): void {
+    onResize(): void {
         this.updateHeightSectionContent();
     }
 
     @HostListener('window:load', ['$event'])
-    onChange(event: Event): void {        
+    onChange(): void {        
         this.updateHeightSectionContent();
     }
     updateHeightSectionContent(): void { 
@@ -97,6 +100,5 @@ export class LayoutSectionComponent implements OnInit, AfterViewInit, OnDestroy 
             this.renderer.setStyle(this.sectionContent.nativeElement, 'height', height + 'px');
             this.renderer.setStyle(this.sectionContent.nativeElement, 'overflow', 'auto');
         }
-        
     }
 }
