@@ -28,7 +28,7 @@
                 <i *ngIf="item.children" class="right fas fa-angle-left"></i>
             </p>
         </a>
-        <ul *ngIf="item.children" [collapse]="item.isCollapsed" [isAnimated]="true" class="nav nav-treeview">
+        <ul *ngIf="item.children" [ngbCollapse]="item.isCollapsed" class="nav nav-treeview">
             <ng-container *ngFor="let item of item.children">
                 <ng-container *ngTemplateOutlet="sidebarInner; context: {item: item}"></ng-container>
             </ng-container>
