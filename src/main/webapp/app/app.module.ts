@@ -16,6 +16,7 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { LayoutModule } from './shared/layout/layout.module';
 import { layoutConfig } from './layouts/layout.config';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { layoutConfig } from './layouts/layout.config';
     Demo01AppRoutingModule,
     LayoutModule,
     LayoutModule.forRoot(layoutConfig),
+    BrowserAnimationsModule,
   ],
   declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
   bootstrap: [MainComponent],
